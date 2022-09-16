@@ -1,8 +1,9 @@
 import axios, { AxiosPromise, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 
 const http:AxiosInstance = axios.create({
-  baseURL: 'https://www.liulongbin.top:8888/api/private/v1/'
+  baseURL: 'http://food.cn/api/'
+  //https://www.liulongbin.top:8888/api/private/v1/
 })
 
 http.interceptors.request.use((config:AxiosRequestConfig) => {
@@ -16,13 +17,16 @@ http.interceptors.request.use((config:AxiosRequestConfig) => {
 
 http.interceptors.response.use((res:AxiosResponse) => {
   const { data } = res
-  if (data.meta.status !== 200 && data.meta.status !== 201) {
-    ElMessage({
-      showClose: true,
-      message: data.meta.msg,
-      type: 'error'
-    })
-  }
+  console.log(data.code);
+  console.log(data);
+  console.log(res);
+  // if (data.code != 1) {
+    // ElMessage({
+    //   showClose: true,
+    //   message: data.msg,
+    //   type: 'error'
+    // })
+  // }
   return res
 }, (error:AxiosError) => {
   return Promise.reject(error)
